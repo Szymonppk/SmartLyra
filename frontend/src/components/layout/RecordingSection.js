@@ -12,18 +12,18 @@ function RecordingSection()
             <img 
                 src={micImage}
                 alt='microphone'
-                className='w-[20vh] h-[20vh] transition-transform hover:scale-125'   
+                className='w-[20vh] h-[20vh] cursor-pointer transition-transform hover:scale-125'   
             />
             <img 
                 src={soundwave}
-                className='w-[40vh] h-[15vh]'
+                className='w-[40vh] h-[40vh]'
            
            />
            <div className='flex flex-row gap-8'>
            <img 
                 src={play}
                 alt='microphone'
-                className='w-[10vh] h-[10vh] transition-transform hover:scale-125'   
+                className='w-[10vh] h-[10vh] cursor-pointer  transition-transform hover:scale-125'   
             />
             <img 
                 src={download}
