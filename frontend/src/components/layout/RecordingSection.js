@@ -7,7 +7,7 @@ import save from '../../images/recording/save.svg';
 function RecordingSection()
 {
     return(
-        <div className='w-full flex-1 flex items-center justify-center flex-col md:flex-row flex-wrap gap-8 md:gap-4 p-4'>
+        <div className='w-full flex-1 flex items-center justify-center flex-col md:flex-row flex-wrap gap-6 md:gap-3 p-4'>
             
             <img 
                 src={micImage}
@@ -16,7 +16,7 @@ function RecordingSection()
             />
             <img 
                 src={soundwave}
-                className='w-[40vh] h-[40vh]'
+                className='w-[40vh] h-[20vh]'
            
            />
            <div className='flex flex-row gap-8'>

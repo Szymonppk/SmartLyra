@@ -4,7 +4,7 @@ import RecordingSection from './RecordingSection';
 function HomeSection()
 {
     return(
-        <div className="h-screen w-full flex flex-col overflow-hidden">
+        <div className="h-screen w-full flex flex-col">
             <RecordingSection/>
             <Fretboard/>
             
