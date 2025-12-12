@@ -1,20 +1,16 @@
+import { DefaultHeader, DefaultBackground } from "../components/common/CommonComponents";
+
 function TabPage() {
     const items = Array.from({ length: 100 }, (_, i) => i);
 
     return (
-        <div className='
-            w-full h-full
+        <DefaultBackground className='
             flex flex-col items-center justify-center
-            bg-zinc-800
             gap-3
         '>
-            <h1 className='
-                text-[3vh] font-black
-                text-stone-300
-                drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]
-            '>
+            <DefaultHeader>
                 Tabs
-            </h1>
+            </DefaultHeader>
 
             <div className='
                 w-[80%] max-w-[1300px] h-[90vh]
@@ -40,7 +36,7 @@ function TabPage() {
                 ))}
             </div>
 
-        </div>
+        </DefaultBackground>
     );
 }
 

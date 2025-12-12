@@ -1,19 +1,13 @@
 import NavBar from '../components/layout/NavBar';
 import HomeSection from '../components/layout/HomeSection';
-
+import { DefaultBackground } from '../components/common/CommonComponents';
 function HomePage(){
     
     return (
-        <div className='
-             w-full 
-             h-full 
-             flex 
-             flex-col 
-             bg-zinc-800
-        '>
+        <DefaultBackground>
             <NavBar/>
             <HomeSection/>
-        </div>
+        </DefaultBackground>
     );
 }
 

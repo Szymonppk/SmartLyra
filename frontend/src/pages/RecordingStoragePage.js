@@ -1,3 +1,5 @@
+import { DefaultHeader } from "../components/common/CommonComponents";
+
 function RecordingStoragePage() {
     const items = Array.from({ length: 100 }, (_, i) => i);
 
@@ -8,13 +10,9 @@ function RecordingStoragePage() {
             bg-zinc-800
             gap-3
         '>
-            <h1 className='
-                text-[3vh] font-black
-                text-stone-300
-                drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]
-            '>
+            <DefaultHeader>
                 Recordings
-            </h1>
+            </DefaultHeader>
 
             <div className='
                 w-[80%] max-w-[1300px] h-[90vh]

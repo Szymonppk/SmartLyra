@@ -1,26 +1,16 @@
-import { DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
+import { DefaultHeader, DefaultBackground,DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
 
 function LoginPage() {
 
     return (
-        <div className='
-            w-full
-            h-full
-            flex
-            flex-col
+        <DefaultBackground className='
             items-center
             justify-center
-            bg-zinc-800
             gap-3
         '>
-            <h1 className='
-                text-[3vh]
-                font-black
-                text-stone-300
-                drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]
-            '>
+            <DefaultHeader>
                 Log In
-            </h1>
+            </DefaultHeader>
 
             <div className='
                 bg-stone-500
@@ -44,8 +34,8 @@ function LoginPage() {
                     font-bold
                     text-[1.5vh]
                     w-[80%]
-                    text-left
-                    ml-1
+                    text-center
+                    
                 '>
                     Username
                 </label>
@@ -56,8 +46,7 @@ function LoginPage() {
                     font-bold
                     text-[1.5vh]
                     w-[80%]
-                    text-left
-                    ml-1
+                    text-center
                     mt-2
                 '>
                     Password
@@ -81,7 +70,7 @@ function LoginPage() {
                 </p>
             </div>
 
-        </div>
+        </DefaultBackground>
     );
 }
 

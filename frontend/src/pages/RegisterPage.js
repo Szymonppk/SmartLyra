@@ -1,22 +1,16 @@
-import { DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
+import { DefaultHeader, DefaultBackground, DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
 
 function RegisterPage() {
 
     return (
-        <div className='
-            w-full h-full
-            flex flex-col items-center justify-center
-            bg-zinc-800
+        <DefaultBackground className='
+            items-center justify-center
             gap-3
         '>
 
-            <h1 className='
-                text-[3vh] font-black
-                text-stone-300
-                drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]
-            '>
+            <DefaultHeader>
                 Create Account
-            </h1>
+            </DefaultHeader>
 
             <div className='
                 w-[80%] max-w-[500px] h-[80vh]
@@ -30,7 +24,7 @@ function RegisterPage() {
             '>
 
                 <label className='
-                    w-[80%] text-left ml-1
+                    w-[80%] text-center ml-1
                     text-[1.5vh] font-bold
                     text-stone-800
                 '>
@@ -42,7 +36,7 @@ function RegisterPage() {
                 />
 
                 <label className='
-                    w-[80%] text-left ml-1 mt-1
+                    w-[80%] text-center ml-1 mt-1
                     text-[1.5vh] font-bold
                     text-stone-800
                 '>
@@ -53,7 +47,7 @@ function RegisterPage() {
                 />
 
                 <label className='
-                    w-[80%] text-left ml-1 mt-1
+                    w-[80%] text-center ml-1 mt-1
                     text-[1.5vh] font-bold
                     text-stone-800
                 '>
@@ -65,7 +59,7 @@ function RegisterPage() {
                 />
 
                 <label className='
-                    w-[80%] text-left ml-1 mt-1
+                    w-[80%] text-center ml-1 mt-1
                     text-[1.5vh] font-bold
                     text-stone-800
                 '>
@@ -93,7 +87,7 @@ function RegisterPage() {
                 </p>
 
             </div>
-        </div>
+        </DefaultBackground>
     );
 }
 
