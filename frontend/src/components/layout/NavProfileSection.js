@@ -9,7 +9,7 @@ function NavProfileSection()
     
     return(
         <div className='relative flex items-center justify-center gap-3'>
-            <div className='hidden md:flex items-center gap-3'>
+            <div className='hidden lg:flex items-center gap-3'>
                 <RedStoneButton>
                     Tabs
                 </RedStoneButton>
@@ -38,7 +38,7 @@ function NavProfileSection()
                         overflow-hidden
                         flex flex-col
                         hidden
-                        md:flex'
+                        lg:flex'
                 >
                     <button className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Profile
@@ -53,7 +53,7 @@ function NavProfileSection()
             </div>
             <button
                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                 className='md:hidden group p-2 rounded-md hover:bg-black/10 transition-colors'>
+                 className='lg:hidden group p-2 rounded-md hover:bg-black/10 transition-colors'>
                 <svg 
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none' 
@@ -79,7 +79,7 @@ function NavProfileSection()
                     z-50 
                     overflow-hidden
                     flex flex-col
-                    md:hidden'
+                    lg:hidden'
                 >
                     <button className='px-4 py-3 text-left text-stone-200 hover:bg-stone-700 transition-colors border-b border-stone-700'>
                         Recordings

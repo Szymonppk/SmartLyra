@@ -1,13 +1,16 @@
 import { DefaultHeader, DefaultBackground } from "../components/common/CommonComponents";
+import NavBar from "../components/layout/NavBar";
 
 function TabPage() {
     const items = Array.from({ length: 100 }, (_, i) => i);
 
     return (
+        
         <DefaultBackground className='
-            flex flex-col items-center justify-center
+            flex flex-col items-center
             gap-3
         '>
+            <NavBar/>
             <DefaultHeader>
                 Tabs
             </DefaultHeader>
@@ -35,7 +38,7 @@ function TabPage() {
                     </div>
                 ))}
             </div>
-
+           
         </DefaultBackground>
     );
 }
