@@ -1,15 +1,15 @@
-import { DefaultHeader } from "../components/common/CommonComponents";
+import { DefaultHeader, DefaultBackground } from "../components/common/CommonComponents";
+import NavBar from "../components/layout/NavBar";
 
 function RecordingStoragePage() {
     const items = Array.from({ length: 100 }, (_, i) => i);
 
     return (
-        <div className='
-            w-full h-full
-            flex flex-col items-center justify-center
-            bg-zinc-800
+        <DefaultBackground className='
+            flex flex-col items-center
             gap-3
         '>
+            <NavBar/>
             <DefaultHeader>
                 Recordings
             </DefaultHeader>
@@ -23,6 +23,7 @@ function RecordingStoragePage() {
                 rounded-xl
                 border-4 border-stone-600
                 shadow-2xl shadow-black/60
+                mb-5
             '>
                 {items.map((item) => (
                     <div key={item} className='
@@ -38,7 +39,7 @@ function RecordingStoragePage() {
                 ))}
             </div>
 
-        </div>
+        </DefaultBackground>
     );
 }
 

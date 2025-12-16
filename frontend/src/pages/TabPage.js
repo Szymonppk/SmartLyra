@@ -24,6 +24,7 @@ function TabPage() {
                 rounded-xl
                 border-4 border-stone-600
                 shadow-2xl shadow-black/60
+                mb-5
             '>
                 {items.map((item) => (
                     <div key={item} className='
