@@ -1,8 +1,10 @@
-from fastapi import FastAPI, HTTPException, Depends, Header
+from fastapi import APIRouter, HTTPException, Depends, Header
 from typing import Optional
 
-
-app = FastAPI()
+router = APIRouter(
+    prefix="/api/scales",
+    tags=["scales"]
+)
 
 SECRET_API_KEY = "a3b3c3-888"  # Jawnie na potrzeby laboratorium
 
@@ -55,12 +57,12 @@ async def verify_api_key(x_api_key: Optional[str] = Header(None)):
     return True
 
 
-@app.get("/api/scales")
+@router.get("/")
 def get_scales(api_key_valid: bool = Depends(verify_api_key)):
 
     return DB_SCALES  # Framework automatycznie ustawia status 200 i zmienia obiekt na JSON
 
-@app.get("/api/scales/{id}")
+@router.get("/{id}")
 def get_scale(id: int):  # Jesli nie bedzie int zwroci blad 422 Unprocessable Entity
 
     found_scale = None
