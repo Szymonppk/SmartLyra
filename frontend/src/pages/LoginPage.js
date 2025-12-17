@@ -1,7 +1,9 @@
 import { DefaultHeader, DefaultBackground,DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
 
+    const navigate = useNavigate();
     return (
         <DefaultBackground className='
             items-center
@@ -67,6 +69,16 @@ function LoginPage() {
                     underline-offset-2
                 '>
                     Forgot password?
+                </p>
+                <p onClick={()=>navigate('/register')} className='
+                    text-[1.2vh]
+                    text-stone-700
+                    hover:text-stone-900
+                    cursor-pointer
+                    underline
+                    underline-offset-2
+                '>
+                    Create new account
                 </p>
             </div>
 

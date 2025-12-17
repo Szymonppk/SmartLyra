@@ -1,9 +1,12 @@
 import logo from '../../images/navbar/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 function Logo()
 {
+    const navigate = useNavigate();
+
     return (
-        <div className='flex flex-row items-center gap-2 select-none cursor-pointer group'>
+        <div onClick={() => navigate('/')} className='flex flex-row items-center gap-2 select-none cursor-pointer group'>
            <img
                 src={logo}
                 alt="SmartLyra-Logo"

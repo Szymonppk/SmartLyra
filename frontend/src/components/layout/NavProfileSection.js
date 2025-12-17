@@ -1,19 +1,28 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import profileIcon from '../../images/navbar/profile.png';
 import { RedStoneButton } from '../common/CommonComponents';
+
 
 function NavProfileSection()
 {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false)
     
+    const navigate = useNavigate();
+    const handleNavigate = (path) => {
+        navigate(path);
+        setIsMenuOpen(false);
+        setIsProfileOpen(false);
+    };
+
     return(
         <div className='relative flex items-center justify-center gap-3'>
             <div className='hidden lg:flex items-center gap-3'>
-                <RedStoneButton>
+                <RedStoneButton onClick={() => handleNavigate('/tabs')}>
                     Tabs
                 </RedStoneButton>
-                 <RedStoneButton>
+                 <RedStoneButton onClick={() => handleNavigate('/recordings')}>
                     Recordings
                 </RedStoneButton>
             
@@ -40,10 +49,10 @@ function NavProfileSection()
                         hidden
                         lg:flex'
                 >
-                    <button className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                    <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Profile
                     </button>
-                    <button className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                    <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Login
                     </button>
                
@@ -81,16 +90,16 @@ function NavProfileSection()
                     flex flex-col
                     lg:hidden'
                 >
-                    <button className='px-4 py-3 text-left text-stone-200 hover:bg-stone-700 transition-colors border-b border-stone-700'>
+                    <button onClick={() => handleNavigate('/recordings')} className='px-4 py-3 text-left text-stone-200 hover:bg-stone-700 transition-colors border-b border-stone-700'>
                         Recordings
                     </button>
-                    <button className='px-4 py-3 text-left text-stone-200 hover:bg-stone-700 transition-colors border-b border-stone-700'>
+                    <button onClick={() => handleNavigate('/tabs')} className='px-4 py-3 text-left text-stone-200 hover:bg-stone-700 transition-colors border-b border-stone-700'>
                         Tabs
                     </button>
-                    <button className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                    <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Profile
                     </button>
-                    <button className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                    <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Login
                     </button>
                 </div>

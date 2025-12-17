@@ -1,7 +1,9 @@
 import { DefaultHeader, DefaultBackground, DefaultInput, RedStoneButton } from '../components/common/CommonComponents';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
 
+    const navigate = useNavigate();
     return (
         <DefaultBackground className='
             items-center justify-center
@@ -76,7 +78,7 @@ function RegisterPage() {
                     </RedStoneButton>
                 </div>
 
-                <p className='
+                <p onClick={()=>navigate('/login')} className='
                     mt-2
                     text-[1.2vh]
                     text-stone-700 hover:text-stone-900
