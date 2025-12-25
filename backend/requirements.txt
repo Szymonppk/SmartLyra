@@ -6,4 +6,5 @@ scikit-learn
 numpy
 sqlalchemy
 mysql-connector-python
-pydantic
+pydantic[email]
+passlib[bcrypt]
