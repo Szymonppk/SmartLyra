@@ -9,7 +9,7 @@ export const RedStoneButton = ({ children, className = '', ...props}) =>{
     );
 };
 
-export const DefaultInput = ({type = 'text', placeholder, className=''}) =>{
+export const DefaultInput = ({type = 'text', placeholder, className='', ...props}) =>{
 
     const baseStyle = 'h-[4vh] w-[25vh] bg-stone-200 border-2 border-stone-600 rounded-md px-3 text-stone-800 text-[1.5vh] placeholder-stone-500 focus:outline-none focus:border-stone-800 focus:bg-white shadow-inner transition-colors';
 
@@ -17,7 +17,8 @@ export const DefaultInput = ({type = 'text', placeholder, className=''}) =>{
         <input 
             className={`${baseStyle} ${className}`}
             type ={type}
-            placeholder={placeholder}    
+            placeholder={placeholder}
+            {...props}    
         />
     );
 };
