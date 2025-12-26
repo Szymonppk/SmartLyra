@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from services import AuthService
-import database
-from schemas import UserCreate
+from app.services.AuthService import AuthService
+from app import database
+from app.schemas.UserCreate import UserCreate
 
 router = APIRouter(
-    prefix="api/register",
+    prefix="/api/register",
     tags=["register"]
 );
 

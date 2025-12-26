@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from app.schemas import UserCreate
-import models
+from app.schemas.UserCreate import UserCreate
+from app.models.User import User
 from app.core import security
 
 
@@ -9,15 +9,15 @@ class AuthService:
 
     @staticmethod
     def create_user(db: Session, user: UserCreate):
-        existing_email = db.query(models.User).filter(
-            models.User.email == user.email).first()
+        existing_email = db.query(User).filter(
+            User.email == user.email).first()
         if existing_email:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Email already registered"
             )
-        existing_username = db.query(models.User).filter(
-            models.User.username == user.username).first()
+        existing_username = db.query(User).filter(
+            User.username == user.username).first()
         if existing_username:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -25,7 +25,7 @@ class AuthService:
             )
         hashed_password = security.get_password_hash(user.password)
 
-        db_user = models.User(
+        db_user = User(
             email=user.email,
             username=user.username,
             password_hash=hashed_password
