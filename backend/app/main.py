@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
-from app.routers import register,scales
+from app.routers import register, scales, login
 
 
 app = FastAPI()
@@ -12,7 +12,7 @@ origins = [
     "http://localhost:3005",
     "http://127.0.0.1:3005"
 ]
-
+# To connect react with fastapi 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -23,6 +23,4 @@ app.add_middleware(
 
 app.include_router(scales.router)
 app.include_router(register.router)
-
-
-
+app.include_router(login.router)
