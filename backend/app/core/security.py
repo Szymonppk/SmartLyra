@@ -4,9 +4,9 @@ from jose import jwt
 from typing import Optional
 import os
 
-secret_key = os.getenv("SECRET_KEY")
-algorithm = os.getenv("HS256")
-access_token_expire = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("HS256")
+ACCESS_TOKEN_EXPIRE = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -27,5 +27,5 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
 
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encoded(to_encode, secret_key, algorithm=algorithm)
+    encoded_jwt = jwt.encoded(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
