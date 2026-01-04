@@ -4,22 +4,21 @@ from app.schemas.UserCreate import UserCreate
 from app.schemas.UserLogin import UserLogin
 from app.models.User import User
 from app.core import security
+from app.repositories.UserRepository import UserRepository
 
 
 class AuthService:
 
     @staticmethod
     def create_user(db: Session, user: UserCreate):
-        #To connect with db DAO will be added
-        existing_email = db.query(User).filter(
-            User.email == user.email).first()
+
+        existing_email = UserRepository.get_by_email(db, email=user.email)
         if existing_email:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Email already registered"
             )
-        existing_username = db.query(User).filter(
-            User.username == user.username).first()
+        existing_username = UserRepository.get_by_username(db, username=user.username)
         if existing_username:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -27,30 +26,20 @@ class AuthService:
             )
         hashed_password = security.get_password_hash(user.password)
 
-        db_user = User(
-            email=user.email,
-            username=user.username,
-            password_hash=hashed_password
-        )
-
-        db.add(db_user)
-        db.commit() 
-        db.refresh(db_user) 
+        db_user = UserRepository.create_user(db, user, hashed_password)
 
         return db_user
 
     @staticmethod
     def authenticate_user(db: Session, user_login: UserLogin):
-        user = db.query(User).filter(
-            User.username == user_login.username
-        ).first()
+        user = UserRepository.get_by_username(db, username = user_login.username)
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Wrong username or password",
                 headers={"WWW-Authenticate": "Bearer"}
             )
-        if not security.verify_password(user_login.password,user.password_hash):
+        if not security.verify_password(user_login.password, user.password_hash):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Wrong username or password",
