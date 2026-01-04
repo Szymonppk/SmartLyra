@@ -47,7 +47,7 @@ function RegisterPage() {
             });
 
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
             if (response.ok) {
                 setSuccess('Account created! Redirecting ...');

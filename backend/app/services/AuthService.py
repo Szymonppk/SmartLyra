@@ -10,6 +10,7 @@ class AuthService:
 
     @staticmethod
     def create_user(db: Session, user: UserCreate):
+        #To connect with db DAO will be added
         existing_email = db.query(User).filter(
             User.email == user.email).first()
         if existing_email:
