@@ -5,9 +5,39 @@ from app.schemas.UserLogin import UserLogin
 from app.models.User import User
 from app.core import security
 from app.repositories.UserRepository import UserRepository
-
+from jose import jwt, JWTError
 
 class AuthService:
+
+    @staticmethod
+    def validate_token(db: Session, token: str):
+
+        credentials_exception = HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Couldn't validate credentials",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+
+        try:
+            payload = jwt.decode(
+                token,
+                security.SECRET_KEY,
+                algorithms=[security.ALGORITHM]
+            )
+
+            username: str = payload.get("sub")
+
+            if username is None:
+                raise credentials_exception
+        except JWTError:
+            raise credentials_exception
+        
+        user = UserRepository.get_by_username(db, username)
+        
+        if user is None:
+            raise credentials_exception
+        
+        return user
 
     @staticmethod
     def create_user(db: Session, user: UserCreate):
@@ -18,7 +48,8 @@ class AuthService:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Email already registered"
             )
-        existing_username = UserRepository.get_by_username(db, username=user.username)
+        existing_username = UserRepository.get_by_username(
+            db, username=user.username)
         if existing_username:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -32,7 +63,7 @@ class AuthService:
 
     @staticmethod
     def authenticate_user(db: Session, user_login: UserLogin):
-        user = UserRepository.get_by_username(db, username = user_login.username)
+        user = UserRepository.get_by_username(db, username=user_login.username)
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
