@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # --- MySQL ---
+  # --- Database ---
   db:
     image: mysql:8.0
     restart: always
@@ -19,7 +19,7 @@ services:
       timeout: 20s
       retries: 10
 
-  # --- (phpMyAdmin) ---
+  # --- Database panel ---
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -33,7 +33,39 @@ services:
     networks:
       - smartlyra-network
 
-  # --- BACKEND ---
+  # --- RabbitMQ ---
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: always
+    ports:
+      - "5672:5672"   # Komunikacja
+      - "15672:15672" # Panel WWW
+    networks:
+      - smartlyra-network
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  # --- WORKER  ---
+  worker:
+    build: ./backend
+    command: python worker.py 
+    volumes:
+      - ./backend:/code
+    environment:
+      DATABASE_URL: mysql+mysqlconnector://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}
+      RABBITMQ_HOST: rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    networks:
+      - smartlyra-network
+
+  # --- BACKEND API ---
   backend:
     build: ./backend
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
@@ -46,8 +78,11 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       ALGORITHM: ${ALGORITHM}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      RABBITMQ_HOST: rabbitmq
     depends_on:
       db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - smartlyra-network
@@ -65,7 +100,6 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WDS_SOCKET_PORT=0
-      - WATCHPACK_POLLING=true
     depends_on:
       - backend
     networks:
@@ -77,4 +111,3 @@ volumes:
 networks:
   smartlyra-network:
     driver: bridge
-

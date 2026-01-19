@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
-from app.routers import register, scales, login, users
+from app.routers import register, scales, login, users, recordings
 
 
 app = FastAPI()
@@ -25,3 +25,4 @@ app.include_router(scales.router)
 app.include_router(register.router)
 app.include_router(login.router)
 app.include_router(users.router)
+app.include_router(recordings.router)
