@@ -81,31 +81,73 @@ function RecordingSection() {
         if (isRecording) {
             stopRecording()
         }
-        else{
+        else {
             startRecording();
         }
-        
+
     };
 
     const handlePlayAudio = () => {
-        if(audioUrl)
-        {
+        if (audioUrl) {
             const audio = new Audio(audioUrl);
             audio.play();
-        } else{
+        } else {
             alert('Record something first 🎤');
         }
     };
 
     const handleDownloadAudio = () => {
-        if(audioUrl)
-        {
+        
+        if (audioUrl) {
             const link = document.createElement('a');
             link.href = audioUrl;
             link.download = 'recording.wav';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+    };
+
+    const handleSaveAudio = async () => {
+        
+        if (!audioBlob) {
+            alert("Record something first 🎤");
+            return;
+        }
+
+        const token = localStorage.getItem('smartlyra_token');
+
+        if (!token) {
+            alert('To save recording you need to be logged in');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', audioBlob, 'recording.wav');
+
+        try {
+            const response = await fetch('http://localhost:8001/api/recordings/upload', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Server response', data);
+                alert('Recording sent successfully!');
+            }
+            else {
+                console.error('Upload failed', response);
+                alert('Error during sending the recording');
+            }
+
+        }
+        catch (err) {
+            console.error('Network error:', err);
+            alert('Something is wrong with server connection');
         }
     };
 
@@ -146,6 +188,7 @@ function RecordingSection() {
                 <img
                     src={save}
                     alt='save'
+                    onClick={handleSaveAudio}
                     className='w-[10vh] h-[10vh] cursor-pointer transition-transform hover:scale-125'
 
                 />

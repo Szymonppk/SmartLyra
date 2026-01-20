@@ -55,6 +55,7 @@ services:
     volumes:
       - ./backend:/code
     environment:
+      PYTHONUNBUFFERED: 1
       DATABASE_URL: mysql+mysqlconnector://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}
       RABBITMQ_HOST: rabbitmq
     depends_on:

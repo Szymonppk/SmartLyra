@@ -24,9 +24,9 @@ def upload_recording(
         return RecordingSchema(
             id=recording.id,
             filename=recording.file_path,
-            message="Plik przesłany, trwa analiza w tle.",
+            message="File sent, analyzing..",
             created_at=recording.created_at
         )
     except Exception as e:
         print(f"Upload error: {e}")
-        raise HTTPException(status_code=500, detail="Wystąpił błąd podczas przetwarzania pliku.")
+        raise HTTPException(status_code=500, detail="Error with file processing")
