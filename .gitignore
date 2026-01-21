@@ -3,7 +3,7 @@ venv/
 __pycache__/
 node_modules/
 db_data/
-
+backend/uploaded_files/
 PORT_DB_EXTERNAL=3307
 PORT_PMA_EXTERNAL=8081
 PORT_BACKEND_EXTERNAL=8001

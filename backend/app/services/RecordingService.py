@@ -5,7 +5,7 @@ from fastapi import UploadFile
 from sqlalchemy.orm import Session
 from app.models.Recording import Recording
 from app.services.RabbitMQService import RabbitMQService
-from app.repositories.RecordingRepository import RecordingRepository # <--- IMPORT
+from app.repositories.RecordingRepository import RecordingRepository 
 
 UPLOAD_DIR = "uploaded_files"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -42,3 +42,5 @@ class RecordingService:
         self.rabbit_service.publish(message)
 
         return new_recording
+    def get_user_recordings(self, user_id: int):
+        return self.repository.get_all_by_user(user_id)
