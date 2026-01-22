@@ -1,6 +1,6 @@
 export const RedStoneButton = ({ children, className = '', ...props}) =>{
 
-    const baseStyle = 'h-[4vh] w-[18vh] border-2 border-red-700 text-black font-semibold text-[1.5vh] text-center rounded-md shadow-md hover:shadow-lg shadow-black/40 transition-transform hover:scale-95';
+    const baseStyle = 'h-[4vh] w-[18vh] border-2 border-stone-700 text-black font-semibold text-[1.5vh] text-center rounded-md shadow-md hover:shadow-lg shadow-black/40 transition-transform hover:scale-95';
 
     return (
         <button {...props} className={`${baseStyle} ${className}`}>

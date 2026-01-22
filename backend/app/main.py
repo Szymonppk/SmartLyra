@@ -1,8 +1,15 @@
 from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
-from app.routers import register, scales, login, users, recordings
+from app.routers import register, scales, login, users, recordings, tabs
+from app.models.User import User
+from app.models.Recording import Recording
+from app.models.Scale import Scale
+from app.models.Tab import Tab
+from app.models.Genre import Genre
+from app.database import engine, Base
 
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -26,3 +33,4 @@ app.include_router(register.router)
 app.include_router(login.router)
 app.include_router(users.router)
 app.include_router(recordings.router)
+app.include_router(tabs.router)

@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import profileIcon from '../../images/navbar/profile.png';
 import { RedStoneButton } from '../common/CommonComponents';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 
-function NavProfileSection()
-{
+function NavProfileSection() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false)
-    
+
     const navigate = useNavigate();
     const handleNavigate = (path) => {
         navigate(path);
@@ -16,24 +16,24 @@ function NavProfileSection()
         setIsProfileOpen(false);
     };
 
-    return(
+    return (
         <div className='relative flex items-center justify-center gap-3'>
             <div className='hidden lg:flex items-center gap-3'>
                 <RedStoneButton onClick={() => handleNavigate('/tabs')}>
                     Tabs
                 </RedStoneButton>
-                 <RedStoneButton onClick={() => handleNavigate('/recordings')}>
+                <RedStoneButton onClick={() => handleNavigate('/recordings')}>
                     Recordings
                 </RedStoneButton>
-            
-            <img 
-                src={profileIcon} 
-                className='h-[10vh] transition-transform hover:scale-95 cursor-pointer'
-                onClick={()=> setIsProfileOpen(!isProfileOpen)}
-            />
-            {isProfileOpen && (
 
-                <div className='
+                <UserCircleIcon
+
+                    className='h-[9vh] w-[9vh] text-zinc-800 hover:text-red-600 transition-transform hover:scale-95 cursor-pointer'
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                />
+                {isProfileOpen && (
+
+                    <div className='
                         absolute 
                         top-full 
                         right-0 
@@ -48,28 +48,28 @@ function NavProfileSection()
                         flex flex-col
                         hidden
                         lg:flex'
-                >
-                    <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
-                        Profile
-                    </button>
-                    <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
-                        Login
-                    </button>
-               
-                
-                </div>
-            )}
+                    >
+                        <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                            Profile
+                        </button>
+                        <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                            Login
+                        </button>
+
+
+                    </div>
+                )}
             </div>
             <button
-                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                 className='lg:hidden group p-2 rounded-md hover:bg-black/10 transition-colors'>
-                <svg 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className='lg:hidden group p-2 rounded-md hover:bg-black/10 transition-colors'>
+                <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    fill='none' 
-                    viewBox='0 0 24 24' 
-                    strokeWidth={2} 
-                    stroke='currentColor' 
-                    className='w-[4vh] h-[4vh] text-red-600 group-hover:text-black transition-colors'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={2}
+                    stroke='currentColor'
+                    className='w-[4vh] h-[4vh] text-zinc-800 group-hover:text-black transition-colors'
                 >
                     <path strokeLinecap='round' strokeLinejoin='round' d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5' />
                 </svg>
@@ -106,7 +106,7 @@ function NavProfileSection()
 
             )}
         </div>
-        
+
     );
 
 }

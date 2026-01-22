@@ -1,0 +1,27 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from typing import List
+
+from app.dependencies import get_current_user, get_db
+from app.models.User import User
+from app.schemas.TabSchema import TabCreateSchema, TabResponseSchema
+from app.services.TabService import TabService
+
+router = APIRouter(
+    prefix="/api/tabs",
+    tags=["tabs"]
+)
+
+@router.post("/", response_model=TabResponseSchema)
+def create_tab(
+    tab_data: TabCreateSchema,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    service = TabService(db)
+    return service.create_new_tab(tab_data, current_user.id)
+
+@router.get("/", response_model=List[TabResponseSchema])
+def get_tabs(db: Session = Depends(get_db)):
+    service = TabService(db)
+    return service.get_all_tabs()
