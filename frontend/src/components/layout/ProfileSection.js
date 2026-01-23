@@ -53,7 +53,7 @@ function ProfileSection() {
                        gap-3
                        '
         >
-            <div className='
+            {0 && <div className='
                             h-[30vh] 
                             w-[30vh] 
                             bg-stone-400
@@ -61,7 +61,7 @@ function ProfileSection() {
                             flex items-center justify-center'
             >
                 Profile photo
-            </div>
+            </div>}
             <DefaultHeader>{profile.username}</DefaultHeader>
             <DefaultHeader>{profile.email}</DefaultHeader>
         </div>

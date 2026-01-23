@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Recordings"]
 )
 
+# multipart/form-data
 @router.post("/upload", response_model=RecordingSchema)
 def upload_recording(
     file: UploadFile = File(...),
@@ -50,7 +51,7 @@ def download_recording(
     """
     Downloads the physical .wav file associated with a specific recording ID.
     """
-    
+
     service = RecordingService(db)
     recording = service.repository.get_by_id(recording_id) 
 
