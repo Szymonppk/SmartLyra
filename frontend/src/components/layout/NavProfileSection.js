@@ -7,13 +7,19 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 function NavProfileSection() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isProfileOpen, setIsProfileOpen] = useState(false)
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const token = localStorage.getItem('smartlyra_token');
 
     const navigate = useNavigate();
     const handleNavigate = (path) => {
         navigate(path);
         setIsMenuOpen(false);
         setIsProfileOpen(false);
+    };
+
+    const handleLogOut = () => {
+
+        localStorage.removeItem('smartlyra_token');
     };
 
     return (
@@ -52,10 +58,16 @@ function NavProfileSection() {
                         <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                             Profile
                         </button>
-                        <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                        {!token && <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                             Login
-                        </button>
-
+                        </button>}
+                        {token && <button onClick={() => {
+                             handleNavigate('/login');
+                             handleLogOut()
+                        }} 
+                        className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                            Log Out
+                        </button>}
 
                     </div>
                 )}
@@ -99,9 +111,17 @@ function NavProfileSection() {
                     <button onClick={() => handleNavigate('/profile')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Profile
                     </button>
-                    <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
+                    {!token && <button onClick={() => handleNavigate('/login')} className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'>
                         Login
-                    </button>
+                    </button>}
+                    {token && <button onClick={() => {
+                        handleNavigate('/login');
+                        handleLogOut();
+                    }}
+                    className='px-4 py-3 text-left text-red-500 font-semibold hover:bg-stone-700 transition-colors'
+                    >
+                        Log Out
+                    </button>}
                 </div>
 
             )}
