@@ -65,7 +65,7 @@ Thanks to full Dockerization, launching the project requires only a few commands
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/Szymonppk/SmartLyra.git
     cd smartlyra
     ```
 
