@@ -11,8 +11,6 @@ class AuthService:
 
     @staticmethod
     def validate_token(db: Session, token: str):
-
-        print(token)
         
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

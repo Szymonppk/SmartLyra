@@ -10,7 +10,7 @@ import os
 
 router = APIRouter(
     prefix="/api/recordings",
-    tags=["recordings"]
+    tags=["Recordings"]
 )
 
 @router.post("/upload", response_model=RecordingSchema)
@@ -19,6 +19,12 @@ def upload_recording(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
+    """
+    Uploads a .wav audio file for processing.
+    
+    The file is queued for background analysis (Scale Detection).
+    Returns the initial recording object with status 'Analyzing...'.
+    """
     service = RecordingService(db)
 
     try:
@@ -41,6 +47,10 @@ def download_recording(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
+    """
+    Downloads the physical .wav file associated with a specific recording ID.
+    """
+    
     service = RecordingService(db)
     recording = service.repository.get_by_id(recording_id) 
 
@@ -68,6 +78,10 @@ def get_recordings(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
+    """
+    Retrieves all audio recordings uploaded by the currently logged-in user.
+    Includes the detected scale name (if analysis is complete).
+    """
     service = RecordingService(db)
     recordings = service.get_user_recordings(current_user.id)
     

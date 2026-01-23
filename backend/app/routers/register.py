@@ -6,14 +6,19 @@ from app.schemas.UserCreate import UserCreate
 
 router = APIRouter(
     prefix="/api/register",
-    tags=["register"]
+    tags=["Auth"]
 );
 
 
 
 @router.post("/")
 def register_user(user: UserCreate,db: Session=Depends(database.get_db)):
-
+    """
+    Registers a new user in the system.
+    
+    - Hashes the password securely.
+    - Checks if the email or username is already taken.
+    """
     new_user = AuthService.create_user(db=db,user=user)
 
     return {
