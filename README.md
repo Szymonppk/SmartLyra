@@ -23,7 +23,7 @@ The entire system operates on full containerization. It is not just a wrapper fo
 * **Celery / Custom Worker**: Queue system for asynchronous processing of `.wav` files.
 
 ### ⚛️ Frontend (User Interface)
-* **React 18**: Library for building a responsive Single Page Application (SPA) interface.
+* **React 19**: Library for building a responsive Single Page Application (SPA) interface.
 * **Tailwind CSS**: Utility-first CSS framework ensuring a consistent Design System and full responsiveness (RWD/Mobile-first).
 
 ---
