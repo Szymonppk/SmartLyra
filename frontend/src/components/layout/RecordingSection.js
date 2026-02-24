@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import micImage from '../../images/recording/microphone.png';
-import soundwave from '../../images/recording/soundwave.png';
+import soundwaveStatic from '../../images/recording/soundwaveStatic.svg';
+import AnimatedSoundwave from '../music/AnimatedSoundwave';
 import playIcon from '../../images/recording/play.png';
 import downloadIcon from '../../images/recording/download.png';
 import save from '../../images/recording/save.svg';
@@ -14,7 +15,7 @@ function RecordingSection() {
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
 
-    // Timer
+    
     useEffect(() => {
         let interval = null;
 
@@ -166,11 +167,19 @@ function RecordingSection() {
                     {formatTime(seconds)}
                 </div>}
             </div>
-            <img
-                src={soundwave}
-                className='w-[40vh] h-[20vh]'
-
-            />
+            <div className='w-[40vh] h-[20vh] flex items-center justify-center transition-all duration-300'>
+                {isRecording ? (
+                    <div className="scale-125 transform transition-transform">
+                         <AnimatedSoundwave />
+                    </div>
+                ) : (
+                    <img
+                        src={soundwaveStatic}
+                        alt="soundwave static"
+                        className='w-full h-full object-contain opacity-50 filter grayscale' 
+                    />
+                )}
+            </div>
             <div className='flex flex-row gap-8'>
                 <img
                     src={playIcon}

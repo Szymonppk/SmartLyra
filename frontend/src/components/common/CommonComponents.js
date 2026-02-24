@@ -1,4 +1,6 @@
-export const RedStoneButton = ({ children, className = '', ...props}) =>{
+import { useState } from "react";
+
+export const RedStoneButton = ({ children, className = '', ...props }) => {
 
     const baseStyle = 'h-[4vh] w-[18vh] border-2 border-stone-700 text-black font-semibold text-[1.5vh] text-center rounded-md shadow-md hover:shadow-lg shadow-black/40 transition-transform hover:scale-95';
 
@@ -9,21 +11,21 @@ export const RedStoneButton = ({ children, className = '', ...props}) =>{
     );
 };
 
-export const DefaultInput = ({type = 'text', placeholder, className='', ...props}) =>{
+export const DefaultInput = ({ type = 'text', placeholder, className = '', ...props }) => {
 
     const baseStyle = 'h-[4vh] w-[25vh] bg-stone-200 border-2 border-stone-600 rounded-md px-3 text-stone-800 text-[1.5vh] placeholder-stone-500 focus:outline-none focus:border-stone-800 focus:bg-white shadow-inner transition-colors';
 
     return (
-        <input 
+        <input
             className={`${baseStyle} ${className}`}
-            type ={type}
+            type={type}
             placeholder={placeholder}
-            {...props}    
+            {...props}
         />
     );
 };
 
-export const DefaultBackground = ({children, className=''}) => {
+export const DefaultBackground = ({ children, className = '' }) => {
 
     const baseStyle = 'w-full h-full flex flex-col bg-zinc-800';
     return (
@@ -33,7 +35,7 @@ export const DefaultBackground = ({children, className=''}) => {
     );
 };
 
-export const DefaultHeader = ({children, className=''}) => {
+export const DefaultHeader = ({ children, className = '' }) => {
 
     const baseStyle = 'text-[3vh] font-black text-stone-300 drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]';
     return (
@@ -42,3 +44,42 @@ export const DefaultHeader = ({children, className=''}) => {
         </h1>
     );
 };
+
+export const FileUploader = ({children, className='', onFilesSelected}) => {
+    
+    const [files, setFiles] = useState([]);
+    const baseStyle = 'text-center border-dashed border-4 p-5 rounded-lg transition-colors';
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(e.dataTransfer.files && e.dataTransfer.files.length > 0){
+            const droppedFiles = Array.from(e.dataTransfer.files);
+            setFiles(droppedFiles);
+            if (onFilesSelected) {
+                onFilesSelected(droppedFiles);
+            }
+        }
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    return (
+        <div
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            className={`${baseStyle} ${className}`}
+        >
+            <p>{children}</p>
+            <ul>
+                {files.map((file, index) => (
+                    <li key={index}>📄 {file.name}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
